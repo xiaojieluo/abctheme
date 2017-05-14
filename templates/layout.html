@@ -24,17 +24,20 @@
 
     <link rel="icon" href="{{ SITE_URL }}/theme/img/favicon.ico">
 
-  <link rel="stylesheet" href="{{ SITE_URL }}theme/css/style.css">
+  <link rel="stylesheet" href="{{ SITE_URL }}/theme/css/style.css">
 {% endblock %}
 </head>
 <body>
 
   <div id="container" class="container">
+      <div class="category-container" style="padding-top:0">
+
     <article id="post-the-ways-to-get-information" class="article article-type-post" itemscope itemprop="blogPost">
 <header id="header" class="header">
     {% include "header.html" %}
 </header>
 <hr>
+
 
 {% block content %}
 {% endblock %}
@@ -50,6 +53,7 @@
       {% endif %}
   </div>
 </footer>
+</div>
 
 <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script>
