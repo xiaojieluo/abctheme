@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block head %}
+{{ super() }}
+{% if SOCIAL.get('twitter', None) %}
+    <meta name="twitter:creator" content="{{ SOCIAL['twitter'].get('name') }}">
+    <meta name="twitter:url" content="{{ SITEURL }}/archives.html">
+    <meta name="twitter:title" content="{{ SITENAME }} ~ Archives">
+    <meta name="twitter:description" content="{{ SITE.get('title') }} ~ Archives du site">
+{% endif %}
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="{{ SITE.get('title', None) }} ~ Archives" />
+<meta property="og:description" content="{{ SITE.get('description', SITE.get('title')+' ~ Archives') }}" />
+<meta property="og:image" content="{{ AVATAR }}" />
+{% endblock head %}
+
+{% block content %}
+<body>
+{# <div id="container" class="container">#}
+  <div class="archive-container" style="width:auto;padding-top:0">
+      {# {% include "header.html" %}#}
+    {# <hr/>#}
+    <section class="archives-wrap">
+        {% for article in dates %}
+            <article class="archive-article archive-type-post">
+              <div class="archive-article-inner">
+                <header class="archive-article-header">
+                  <a href="/2017/04/12/text-data-visualization-wordle.html" class="archive-article-date">
+                    <time datetime="{{ article.date }}" itemprop="datePublished">{{ article.locale_date}}</time></a>
+                  <h1 itemprop="name">
+                    <a class="archive-article-title" href="{{ article.url }}">{{ article.title}}</a></h1>
+                </header>
+              </div>
+            </article>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "layout.html" %} {% block description %} {{ article.summary|e }} {% endblock %} {% block og %} {{super()}}
+<meta property="og:title" content="{{ article.title }}">
+<meta property="og:url" content="{{ SITE.get('url', '/')}}{{article.url}}">
+<meta property="og:description" content="{{ article.summary|e if article.summary else SITE.get('description', '') }}">
+<meta name="og:updated_time" content="{{ article.date }}"> {% endblock %} {% block twitter %} {{super()}} {% if TWITTER_NAME %}
+<meta name="twitter:title" content="{{ article.title }}">
+<meta name="twitter:description" content="{{ article.summary|e }}"> {% endif %} {% endblock %} {% block content %} {#
+<hr/>#}
+<div class="article-inner">
+    <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+          {{ article.title }}
+        </h1>
+    </header>
+    <div class="article-entry typo" itemprop="articleBody">
+        {{ article.content}}
+        <hr>
+        <p>本作品采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external">知识共享 署名-非商业性使用-禁止演绎 4.0 国际 许可协议</a>进行许可。</p>
+
+
+    </div>
+    <footer class="article-footer">
+        <ul class="article-meta">
+            <li>
+                <span class="label">Published Date:</span>
+                <a href="{{SITEURL}}{{article.url}}" class="article-date">
+                    <time datetime="2017-01-13T16:10:52.000Z" itemprop="datePublished">{{article.date|strftime('%Y-%m-%d')}}</time>
+                </a>
+
+            </li>
+
+            <li>
+                <span class="label">Category:</span>
+
+                <div class="article-category">
+                    <a class="article-category-link" href="/categories/Thought/">Thought</a>
+                </div>
+
+
+            </li>
+
+
+            <li>
+                <span class="label">Tag:</span>
+                {% if article.tags %}
+                <ul class="article-tag-list">
+                    {% for tag in article.tags %}
+                    <li class="article-tag-list-item"><a class="article-tag-list-link" href="{{ SITEURL }}{{tag.url}}">{{tag.name}}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+
+            <hr/>
+        </ul>
+    </footer>
+</div>
+
+
+{# <nav id="article-nav" class="article-nav">
+
+    <a href="/2017/04/12/text-data-visualization-wordle.html" id="article-nav-newer" class="article-nav-link-wrap newer">
+        <strong class="article-nav-caption">Newer</strong>
+        <div class="article-nav-title">
+
+            文本数据可视化（上）——从 Wordle 谈起
+
+        </div>
+    </a>
+
+
+    <a href="/2017/01/03/basics-of-data-visualization-visual-encoding-principles.html" id="article-nav-older" class="article-nav-link-wrap older">
+        <strong class="article-nav-caption">Older</strong>
+        <div class="article-nav-title">数据可视化基础——视觉编码</div>
+    </a>
+
+</nav>#}
+
+
+
+</article>
+
+
+<section id="comments" class="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+{% endblock %}

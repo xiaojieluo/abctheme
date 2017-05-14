@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="{{ SITE.get('language', 'en') }}">
+<head>
+{% block head %}
+<meta charset="utf-8">
+
+<title>{% block title %}{{ SITE.get('title', None)+' | '+AUTHOR }}{% endblock %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="{% block description %}{{ SITE.get('description', 'blog') }}{% endblock %}">
+{% block og %}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ SITENAME }}">
+{% endblock %}
+
+{% block twitter %}
+    {% if TWITTER_NAME %}
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:creator" content="@{{ TWITTER_NAME }}">
+    {% endif %}
+{% endblock %}
+
+    <link rel="alternate" href="/atom.xml" title="GeekPlux" type="application/atom+xml">
+
+
+    <link rel="icon" href="{{ SITE_URL }}/theme/img/favicon.ico">
+
+  <link rel="stylesheet" href="{{ SITE_URL }}theme/css/style.css">
+{% endblock %}
+</head>
+<body>
+
+  <div id="container" class="container">
+    <article id="post-the-ways-to-get-information" class="article article-type-post" itemscope itemprop="blogPost">
+<header id="header" class="header">
+    {% include "header.html" %}
+</header>
+<hr>
+
+{% block content %}
+{% endblock %}
+
+
+
+<footer id="footer" class="post-footer footer">
+  <hr/>
+  <div id="footerContent" class="footer-content">
+      {% if ABC_THEME.get('copyright', None) %}
+
+      <div id="copyright" class="copyright">{{ SITE.get('copyright', None) }}</div>
+      {% endif %}
+  </div>
+</footer>
+
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f3122f4261e8b3074f848be04f62f0c0";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  </body>
+</html>

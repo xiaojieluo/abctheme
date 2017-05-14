@@ -1,0 +1,13 @@
+  <nav id="main-nav" class="main-nav">
+    {% for link in PAGE %}
+        <a class="main-nav-link" href="{{ link[1] }}">{{ link[0] }}</a>
+    {% endfor %}
+    {% if DISPLAY_PAGES_ON_MENU %}
+        {% for page in pages %}
+            <a href="{{ page.url }}">{{ page.title }}</a>
+        {% endfor %}
+    {% endif %}
+</nav>
+  <nav id="sub-nav">
+    <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+  </nav>
