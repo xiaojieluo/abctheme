@@ -1,86 +1,153 @@
 <!DOCTYPE html>
 <html lang="{{ SITE.get('language', 'en') }}">
+
 <head>
-{% block head %}
-<meta charset="utf-8">
-
-<title>{% block title %}{{ SITE.get('title', None)+' | '+AUTHOR }}{% endblock %}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="{% block description %}{{ SITE.get('description', 'blog') }}{% endblock %}">
-{% block og %}
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="{{ SITENAME }}">
-{% endblock %}
-
-{% block twitter %}
-    {% if TWITTER_NAME %}
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:creator" content="@{{ TWITTER_NAME }}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ SITE.get('title', None) }}{% endblock %}</title>
+    <meta name="keywords" content="luoxiaojie blog" />
+    <meta name="description" content="{% block description %}{{ SITE.get('description', 'blog') }}{% endblock %}" />
+    <style type="text/css">
+        .indexcolor,
+        .willerce a {
+            /*color: #ffffff !important;*/
+        }
+    </style>
+    <style type="text/css" id="custom-background-css">
+        body.custom-background {
+            /*background-color: #0a0a0a;*/
+            /*background-image: url("http://www.wpke.net/wp-content/uploads/2017/03/sdfgge.jpg");*/
+            background-position: left top;
+            background-size: auto;
+            background-repeat: repeat;
+            background-attachment: scroll;
+        }
+    </style>
+    <link rel="icon" href="{{ SITE_URL }}/theme/img/cropped-avatar-32x32.png" sizes="32x32" />
+    <link rel="icon" href="{{ SITE_URL }}/theme/img/cropped-avatar-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="{{ SITE_URL }}/theme/img/cropped-avatar-180x180.png" />
+    <meta name="msapplication-TileImage" content="{{ SITE_URL }}/theme/img/cropped-avatar-270x270.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {% if HIGHLIGHT %}
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/{{HIGHLIGHT_THEME}}.min.css" rel="stylesheet">
     {% endif %}
-{% endblock %}
+    <link rel="stylesheet" href="{{ SITE_URL }}/theme/css/style.css">
 
-    <link rel="alternate" href="/atom.xml" title="GeekPlux" type="application/atom+xml">
-
-
-    <link rel="icon" href="{{ SITE_URL }}/theme/img/favicon.ico">
-
-    <link href="https://mozillazg.github.io/theme/css/pygments/github.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="{{ SITE_URL }}/theme/css/style.css">
-
-{% endblock %}
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    {% block css %}{% endblock %}
 </head>
+
 <body>
+    <header class="mod-head">
+        <h1 class="mod-head__title"><a href="{{SITEURL}}">{{AUTHOR}}</a></h1>
+        <div class="mod-head__logo">
+            <a href="{{SITEURL}}" title="{{AUTHOR}}"><img class="avatar" width="26" height="26" src="{{ SITE_URL }}/theme/img/avatar.png"></a>
+        </div>
+        <nav class="mod-head__nav">
+            <ul id="menu-%e8%8f%9c%e5%8d%951" class="mod-head__ul">
+                {% for link in PAGE %}
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="{{ link[1] }}">{{ link[0] }}</a>{% if not loop.last %}<span>·</span>{% endif %}</li>
+                {% endfor %}
+                {% if DISPLAY_PAGES_ON_MENU %}
+                    {% for page in pages %}
+                        <a href="{{ page.url }}">{{ page.title }}</a>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="{{ page.url }}">{{ page.title }}</a>{% if not loop.last %}<span>·</span>{% endif %}</li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </nav>
+        <a id="right-panel-link" href="#right-panel"><i class="iconfont icon-fenlei"></i></a>
+        <div id="right-panel" class="panel">
+            <h3 class="rightnavh3">Menu</h3>
+            <ul id="menu-%e8%8f%9c%e5%8d%951-1" class="ymod-head">
+                {% for link in PAGE %}
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="{link[1]}">{{link[0]}}</a></li>
+                {% endfor %}
+                {% if DISPLAY_PAGES_ON_MENU %}
+                    {% for page in pages %}
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="{{ page.url }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                {% endif %}
+            </ul> <button id="close-panel-bt">X Close</button>
+        </div>
+        <script src="{{SITE_URL}}/theme/js/slider.js"></script>
+        <script>
+            $('#right-panel-link').panelslider({
+                side: 'right',
+                duration: 200
+            });
+            $('#close-panel-bt').click(function() {
+                $.panelslider.close();
+            });
+        </script>
+        <hr />
+    </header>
+    {% block content %}
+    {% endblock %}
+    <footer class="mod-footer" role="contentinfo" id="footer_in">
+        {% if COPYRIGHT %}
+            <hr />
+            <div class="copyright">{{COPYRIGHT}}</div>
+            {# <p class="f_bq">Copyright &copy;2017 Crazy uncle Powered by <a class="banquan" target="_blank" href="http://www.2zzt.com">WordPress</a></p>#}
+        {% endif %}
+    </footer>
+    <script>
+        POWERMODE.colorful = true; // ture 为启用礼花特效
+        POWERMODE.shake = false; // false 为禁用震动特效
+        document.body.addEventListener('input', POWERMODE);
+    </script>
+    <script type='text/javascript' src='{{SITE_URL}}/theme/js/comment-reply.min.js?ver=4.8'></script>
+    <script type='text/javascript' src='{{SITE_URL}}/theme/js/jquery.js?ver=1.12.4'></script>
+    <script type='text/javascript' src='{{SITE_URL}}/theme/js/jquery-migrate.min.js?ver=1.4.1'></script>
 
-  <div id="container" class="container">
-      <div class="category-container" style="padding-top:0">
+    {% if HIGHLIGHT %}
+    <script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    {# <script>hljs.initHighlightingOnLoad();</script>#}
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $('.highlight').each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+    </script>
+    {% endif %}
 
-    <article id="post-the-ways-to-get-information" class="article article-type-post" itemscope itemprop="blogPost">
-<header id="header" class="header">
-    {% include "header.html" %}
-</header>
-<hr>
+    {% if COMMENT_STATUS %}
+    <script>
+    {% if article %}
+    var disqus_config = function () {
+            this.page.url = "{{SITEURL}}/{{article.url}}    ";  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = "{{article.title}}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    {% endif %}
+    var disqus = {
+      load : function disqus(){
+          if(typeof DISQUS !== 'object') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://llnhhy.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+            $('#load-disqus').remove(); ///加载后移除按钮
+          }
+      }
+    }
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    {% endif %}
 
+    {% if GOOGLE_ANALYTICS %}
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-{% block content %}
-{% endblock %}
+    ga('create', '{{GOOGLE_ANALYTICS}}', 'auto');
+    ga('send', 'pageview');
+    </script>
+    {% endif %}
+</body>
 
-
-
-<footer id="footer" class="post-footer footer">
-  <hr/>
-  <div id="footerContent" class="footer-content">
-      {% if ABC_THEME.get('copyright', None) %}
-
-      <div id="copyright" class="copyright">{{ SITE.get('copyright', None) }}</div>
-      {% endif %}
-  </div>
-</footer>
-</div>
-
-<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?f3122f4261e8b3074f848be04f62f0c0";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-{% if GOOGLE_ANALYTICS %}
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', '{{GOOGLE_ANALYTICS}}', 'auto');
-ga('send', 'pageview');
-
-</script>
-{% endif %}
-
-  </body>
 </html>

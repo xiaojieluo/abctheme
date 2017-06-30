@@ -1,69 +1,70 @@
-{# {% extends "layout.html" %}#}<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ SITE.get('language', 'en') }}">
+
 <head>
-<meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ SITE.get('title', None) }}{% endblock %}</title>
+    <meta name="keywords" content="luoxiaojie blog" />
+    <meta name="description" content="{% block description %}{{ SITE.get('description', 'blog') }}{% endblock %}" />
+    <style type="text/css">
+        .indexcolor,
+        .willerce a {
+            /*color: #ffffff !important;*/
+        }
+    </style>
+    <style type="text/css" id="custom-background-css">
+        body.custom-background {
+            /*background-color: #0a0a0a;*/
+            /*background-image: url("http://www.wpke.net/wp-content/uploads/2017/03/sdfgge.jpg");*/
+            background-position: left top;
+            background-size: auto;
+            background-repeat: repeat;
+            background-attachment: scroll;
+        }
+    </style>
+    <link rel="icon" href="{{ SITE_URL }}theme/img/cropped-avatar-32x32.png" sizes="32x32" />
+    <link rel="icon" href="{{ SITE_URL }}theme/img/cropped-avatar-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="{{ SITE_URL }}theme/img/cropped-avatar-180x180.png" />
+    <meta name="msapplication-TileImage" content="{{ SITE_URL }}theme/img/cropped-avatar-270x270.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="{{ SITE_URL }}theme/css/style.css">
 
-<title>{% block title %}{{ SITE.get('title', None) }}{% endblock %}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="{% block description %}{{ SITE.get('description', 'blog') }}{% endblock %}">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="{{ SITENAME }}">
-
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:creator" content="@{{ TWITTER_NAME }}">
-
-
-    <link rel="alternate" href="/atom.xml" title="GeekPlux" type="application/atom+xml">
-
-
-    <link rel="icon" href="{{ SITE_URL }}/theme/img/favicon.ico">
-
-  <link rel="stylesheet" href="{{ SITE_URL }}theme/css/style.css">
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 </head>
-    <body class="home-body">
+<style>
+    * {
+        margin: 0;
+        padding: 0
+    }
 
-      <div id="container" class="container">
-        <div class="home">
-          <div class="content">
-            <div class="profile">
-              <h1 class="nickname">{{ AUTHOR }}</h1>
-              <div class="description">
-                <p><p>{{ DESCRIPTION}}</p></p>
-              </div>
-            </div>
-            <hr/>
-            <ul class="links">
-                <li>
-                  <a href="{{ SITE.get('url', '') }}/archives">Blog</a>
-                </li>
-                {% if THEME_LINKS %}
-                    {% for link in THEME_LINKS %}
-                        <li><a href="{{link[1]}}">{{link[0]}}</a></li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
-          </div>
-        </div>
-      </div>
+    body {
+        font: 400 16px/1.62 "Monaco", sans-serif;
+        color: #535353;
+        overflow: hidden
+    }
+</style>
 
 
-      <footer id="footer" class="home-footer footer">
-          {% if ABC_THEME.get('copyright', None) %}
-              <div id="copyright" class="copyright">{{ ABC_THEME.get('copyright', None) }}</div>
-          {% endif %}
-      </footer>
+</head>
 
+<body class="custom-background">
+    <div class="willerce">
+        <div class="sydlogo">
+            <img class="avatar" width="128" height="128" src="http://www.wpke.net/wp-content/uploads/2017/02/avatar.png"> </div>
+        <h1 class="indexcolor">{{ AUTHOR }}</h1>
+        <p class="indexcolor">{{DESCRIPTION}} <p>
+        <p>More <a href="/about">About Me</a> </p>
+        <p class="indexcolor" style="height: 24px; line-height: 24px; margin: 15px 0;">
+            <i class="iconfont icon-zuobiao"></i>{{CITY}} · {{COUNTRY}} </p>
+        <p class="nav">
+            {% if THEME_LINKS %}
+                {% for link in THEME_LINKS %}
+                    <a href="{{link[1]}}">{{link[0]}}</a>
+                {% endfor %}
+            {% endif %}
+        </p>
+    </div>
+</body>
 
-      <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-      <script>
-      var _hmt = _hmt || [];
-      (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?f3122f4261e8b3074f848be04f62f0c0";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-      </script>
-
-        </body>
-      </html>
+</html>
